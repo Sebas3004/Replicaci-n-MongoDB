@@ -1,6 +1,6 @@
 version: '2'
 services:
-  
+
   mongors1n1:
     container_name: mongors1n1
     image: mongo
@@ -18,7 +18,7 @@ services:
   mongors1n2:
     container_name: mongors1n2
     image: mongo
-    command: mongod --shardsvr --replSet mongors1 --dbpath /data/db --port 27017
+    command: mongod --shardsvr --replSet mongors1 -dbpath /data/db --port 27017
     ports:
       - 27027:27017
     expose:
@@ -42,10 +42,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - data3:/data/db
-
-
-
-
 
   mongors2n1:
     container_name: mongors2n1
@@ -74,7 +70,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - data5:/data/db
-      
+
   mongors2n3:
     container_name: mongors2n3
     image: mongo
@@ -89,6 +85,47 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - data6:/data/db
 
+  mongors3n1:
+    container_name: mongors3n1
+    image: mongo
+    command: mongod --shardsvr --replSet mongors3 --dbpath /data/db --port 27017
+    ports:
+      - 27077:27017
+    expose:
+      - "27017"
+    environment:
+      TERM: xterm
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - data7:/data/db
+
+  mongors3n2:
+    container_name: mongors3n2
+    image: mongo
+    command: mongod --shardsvr --replSet mongors3 --dbpath /data/db --port 27017
+    ports:
+      - 27087:27017
+    expose:
+      - "27017"
+    environment:
+      TERM: xterm
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - data8:/data/db
+
+  mongors3n3:
+    container_name: mongors3n3
+    image: mongo
+    command: mongod --shardsvr --replSet mongors3 --dbpath /data/db --port 27017
+    ports:
+      - 27097:27017
+    expose:
+      - "27017"
+    environment:
+      TERM: xterm
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - data9:/data/db
 
   mongocfg1:
     container_name: mongocfg1
@@ -126,9 +163,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - config3:/data/db
 
-
-
-
   mongos1:
     container_name: mongos1
     image: mongo
@@ -142,7 +176,7 @@ services:
       - "27017"
     volumes:
       - /etc/localtime:/etc/localtime:ro
-  
+
   mongos2:
     container_name: mongos2
     image: mongo
@@ -164,6 +198,9 @@ volumes:
   data4:
   data5:
   data6:
+  data7:
+  data8:
+  data9:
   config1:
   config2:
   config3:

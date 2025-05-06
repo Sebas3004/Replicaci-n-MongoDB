@@ -56,6 +56,21 @@ rs.initiate({
 })
 ```
 
+Entrar en mongors3n1:
+```
+docker exec -it mongors3n1 mongosh
+```
+
+```js
+rs.initiate({
+    _id: "mongors3", 
+    members: [
+        { _id: 0, host: "mongors3n1" },
+        { _id: 1, host: "mongors3n2" },
+        { _id: 2, host: "mongors3n3" }
+    ]
+})
+```
 ## Agregar Shards y Shardear Colección
 
 Conectarse a mongos1:
@@ -66,6 +81,8 @@ docker exec -it mongos1 mongosh
 ```js
 sh.addShard("mongors1/mongors1n1:27017")
 sh.addShard("mongors2/mongors2n1:27017")
+sh.addShard("mongors3/mongors3n1:27017")
+
 
 use socialTravelDB
 sh.enableSharding("socialTravelDB")
